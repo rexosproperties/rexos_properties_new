@@ -98,9 +98,12 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-dark mb-1">Phone Number</p>
-                  <p className="text-sm font-semibold text-navy">
+                  <a
+                    href="tel:+2349164742000"
+                    className="text-sm font-semibold text-navy whitespace-nowrap hover:text-navy-dark transition-colors"
+                  >
                     +234 916 474 2000
-                  </p>
+                  </a>
                 </div>
               </div>
 
