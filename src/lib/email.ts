@@ -3,7 +3,9 @@ import nodemailer from "nodemailer";
 // Create email transporter using Gmail (you can change this to another provider)
 // For production, use environment variables for credentials
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.EMAIL_HOST,
+  port: Number(process.env.EMAIL_PORT) || 465,
+  secure: (process.env.EMAIL_PORT || "465") === "465",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
