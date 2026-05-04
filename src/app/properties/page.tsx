@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import AgentMatchingModal from "@/components/ui/AgentMatchingModal";
 
 const propertyTabs = ["For Sale", "For Rent", "Shortlet"];
 
@@ -95,9 +95,9 @@ const properties = [
 ];
 
 export default function PropertiesPage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState("For Sale");
   const [activeSort, setActiveSort] = useState("Newest");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     type: "",
     price: "",
@@ -113,19 +113,23 @@ export default function PropertiesPage() {
   };
 
   const handleSearch = () => {
-    const params = new URLSearchParams();
-    if (formData.type) params.append("type", formData.type);
-    if (formData.price) params.append("price", formData.price);
-    if (formData.location) params.append("location", formData.location);
-    if (formData.rooms) params.append("rooms", formData.rooms);
-    params.append("tab", activeTab);
-    params.append("sort", activeSort);
-
-    router.push(`/ai-assistance?${params.toString()}`);
+    setIsModalOpen(true);
   };
 
   return (
     <>
+      <AgentMatchingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        searchCriteria={{
+          type: formData.type,
+          price: formData.price,
+          location: formData.location,
+          rooms: formData.rooms,
+          tab: activeTab,
+          sort: activeSort,
+        }}
+      />
       {/* Page Banner */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 text-center border-b border-gray-100">
         <div className="max-w-7xl mx-auto">
