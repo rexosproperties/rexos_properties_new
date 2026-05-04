@@ -9,7 +9,7 @@ import { z } from "zod";
 const enquirySchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email"),
-  phone: z.string().default(""),
+  phone: z.string(),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 

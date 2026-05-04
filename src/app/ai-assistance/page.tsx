@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 interface Agent {
   id: number;
@@ -58,7 +58,7 @@ const agents: Agent[] = [
   },
 ];
 
-export default function AIAssistancePage() {
+function AIAssistanceContent() {
   const searchParams = useSearchParams();
   const propertyType = searchParams.get("type");
   const priceRange = searchParams.get("price");
@@ -257,5 +257,13 @@ export default function AIAssistancePage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function AIAssistancePage() {
+  return (
+    <Suspense fallback={null}>
+      <AIAssistanceContent />
+    </Suspense>
   );
 }
