@@ -38,7 +38,7 @@ export default function AboutPage() {
 
       {/* About Content */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto space-y-6 text-gray-dark leading-relaxed">
+        <div className="max-w-7xl mx-auto space-y-6 text-gray-dark leading-relaxed">
           <p>
             Established in 2019, Rex&apos;o&apos;s Properties is defined by a
             commitment to refined living and enduring quality. Since inception,
