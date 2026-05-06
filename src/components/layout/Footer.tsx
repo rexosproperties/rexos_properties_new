@@ -121,7 +121,9 @@ export default function Footer() {
               </h3>
               <div className="flex items-center gap-4">
                 <a
-                  href="#"
+                  href="https://facebook.com/share/15jMDmXkG1/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Facebook"
                   className="text-white/80 hover:text-white transition-colors"
                 >
@@ -133,7 +135,9 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="#"
+                  href="https://instagram.com/rexos_properties"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="text-white/80 hover:text-white transition-colors"
                 >
@@ -145,7 +149,9 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="#"
+                  href="https://tiktok.com/@rexosproperties"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="TikTok"
                   className="text-white/80 hover:text-white transition-colors"
                 >

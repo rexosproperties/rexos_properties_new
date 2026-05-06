@@ -5,9 +5,13 @@ import Link from "next/link";
 import AgentMatchingModal from "@/components/ui/AgentMatchingModal";
 
 const heroImages = [
-  "/assets/images/hero-1.png",
-  "/assets/images/hero-2.png",
-  "/assets/images/hero-3.png",
+  "/assets/images/slider-1.png",
+  "/assets/images/slider-2.png",
+  "/assets/images/slider-3.png",
+  "/assets/images/slider-4.png",
+  "/assets/images/slider-5.png",
+  "/assets/images/slider-6.png",
+  "/assets/images/slider-7.png",
 ];
 
 const propertyTabs = ["For Sale", "For Rent"];

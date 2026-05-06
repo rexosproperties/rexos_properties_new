@@ -271,7 +271,7 @@ export default function WhiteSandPage() {
           {/* Right: Sticky Price Card */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-              <p className="text-2xl font-bold text-navy mb-6">₦800,000,000</p>
+              <p className="text-2xl font-bold text-navy mb-6">₦200,000,000</p>
 
               <div className="flex flex-col gap-3">
                 <Link
