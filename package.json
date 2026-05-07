@@ -9,11 +9,18 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "seed:admin": "node --env-file=.env scripts/seed-admin.mjs",
-    "seed:properties": "node --env-file=.env scripts/seed-properties.mjs"
+    "seed:properties": "node --env-file=.env scripts/seed-properties.mjs",
+    "seed:blog": "node --env-file=.env scripts/seed-blog.mjs",
+    "seed:team": "node --env-file=.env scripts/seed-team.mjs",
+    "seed:testimonials": "node --env-file=.env scripts/seed-testimonials.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^5.22.0",
+    "@tiptap/extension-image": "^3.22.5",
+    "@tiptap/extension-link": "^3.22.5",
+    "@tiptap/react": "^3.22.5",
+    "@tiptap/starter-kit": "^3.22.5",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.10.0",
     "next": "16.2.1",

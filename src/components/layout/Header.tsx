@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
+import type { SiteSettings } from "@/lib/site-settings";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -12,8 +12,9 @@ const navLinks = [
   { label: "Blog & News", href: "/blog" },
 ];
 
-export default function Header() {
+export default function Header({ settings }: { settings: SiteSettings }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const logoSrc = settings.logoUrl || "/assets/images/Icon/logo-header.svg";
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
@@ -21,11 +22,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/">
-            <Image
-              src="/assets/images/Icon/logo-header.svg"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={logoSrc}
               alt="Rex'o's Properties"
-              width={107}
-              height={34}
+              className="h-9 w-auto object-contain"
             />
           </Link>
 

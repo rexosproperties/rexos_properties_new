@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { SiteSettings } from "@/lib/site-settings";
 
 const companyLinks = [
   { label: "Home", href: "/" },
@@ -10,7 +11,8 @@ const companyLinks = [
   { label: "Blog & News", href: "/blog" },
 ];
 
-export default function Footer() {
+export default function Footer({ settings }: { settings: SiteSettings }) {
+  const logoSrc = settings.logoUrl || "/assets/images/Icon/logo-footer.svg";
   return (
     <footer className="bg-blue-steel text-white">
       {/* Top Banner */}
@@ -29,11 +31,11 @@ export default function Footer() {
           {/* Left Side: Logo & Info */}
           <div>
             <div className="mb-4">
-              <Image
-                src="/assets/images/Icon/logo-footer.svg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={logoSrc}
                 alt="Rex'o's Properties"
-                width={116}
-                height={36}
+                className="h-9 w-auto object-contain"
               />
             </div>
             <p className="text-sm text-white/80 mb-6 leading-relaxed max-w-md">
@@ -52,7 +54,7 @@ export default function Footer() {
                   height={16}
                   className="mt-0.5"
                 />
-                <span>No 8B, Abiodun Ikomi Street, Lekki , Lagos.</span>
+                <span>{settings.address}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Image
@@ -61,7 +63,12 @@ export default function Footer() {
                   width={16}
                   height={16}
                 />
-                <span>+234 916 474 2000</span>
+                <a
+                  href={`tel:${settings.phone.replace(/\s/g, "")}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {settings.phone}
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Image
@@ -70,7 +77,12 @@ export default function Footer() {
                   width={16}
                   height={16}
                 />
-                <span>info@rexsoproperties.com</span>
+                <a
+                  href={`mailto:${settings.email}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {settings.email}
+                </a>
               </div>
             </div>
           </div>
@@ -120,7 +132,7 @@ export default function Footer() {
               </h3>
               <div className="flex items-center gap-4">
                 <a
-                  href="https://facebook.com/share/15jMDmXkG1/"
+                  href={settings.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -134,7 +146,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://instagram.com/rexos_properties"
+                  href={settings.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -148,7 +160,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://tiktok.com/@rexosproperties"
+                  href={settings.tiktokUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="TikTok"

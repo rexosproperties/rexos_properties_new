@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-const teamMembers = [
-  { name: "Albert Okala", role: "CEO" },
-  { name: "Damilola Dyedayo", role: "Project Manager" },
-  { name: "Emmanuel Effong", role: "Marketing Manager" },
-  { name: "Amarachi Anyaoku", role: "Sales Manager" },
-];
+export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const teamMembers = await prisma.teamMember.findMany({
+    orderBy: [{ order: "asc" }, { name: "asc" }],
+  });
   return (
     <>
       {/* Page Banner */}
@@ -107,11 +106,25 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member) => (
-              <div key={member.name} className="text-center">
-                {/* Photo placeholder */}
-                <div className="w-full aspect-square bg-gray-100 rounded-2xl mb-4" />
+              <div key={member.id} className="text-center">
+                <div className="w-full aspect-square bg-gray-100 rounded-2xl mb-4 overflow-hidden">
+                  {member.imageUrl && (
+                    <Image
+                      src={member.imageUrl}
+                      alt={member.name}
+                      width={300}
+                      height={300}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
                 <h3 className="text-base font-bold text-navy">{member.name}</h3>
                 <p className="text-sm text-gray-dark">{member.role}</p>
+                {member.bio && (
+                  <p className="text-xs text-gray-dark mt-2 leading-relaxed">
+                    {member.bio}
+                  </p>
+                )}
               </div>
             ))}
           </div>
