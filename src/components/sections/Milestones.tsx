@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { target: 5, suffix: "+", label: "Successful Project Done" },
+  { target: 33, suffix: "+", label: "Successful Project Done" },
   { target: 7, suffix: "+", label: "Projects" },
   { target: 700, suffix: "+", label: "Delightful Clients" },
   { target: 8, suffix: "+", label: "Locations" },
@@ -37,7 +37,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
           }, duration / steps);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(el);
@@ -62,7 +62,7 @@ export default function Milestones() {
             Milestones we&apos;re honored to have achieved
           </h2>
           <p className="text-white/80 leading-relaxed">
-            These aren&apos;t just our milestones—they&apos;re yours too. Every
+            These aren&apos;t just our milestones, they&apos;re yours too. Every
             home delivered, every client served, and every community created
             reflects our shared commitment to quality real estate. Together,
             we&apos;ve built something extraordinary.

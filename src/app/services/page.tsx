@@ -22,7 +22,7 @@ const services = [
 
 const stats = [
   { value: "7+", label: "Years Experience" },
-  { value: "500+", label: "Homes Successfully Delivered" },
+  { value: "33+", label: "Homes Successfully Delivered" },
   { value: "95%", label: "Client Satisfaction Rate" },
 ];
 

@@ -8,7 +8,6 @@ const companyLinks = [
   { label: "Project", href: "/properties" },
   { label: "Portfolio", href: "/properties" },
   { label: "Blog & News", href: "/blog" },
-  { label: "FAQ", href: "/#faq" },
 ];
 
 export default function Footer() {

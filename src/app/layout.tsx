@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ConditionalChrome from "@/components/layout/ConditionalChrome";
 
 /**
  * Root Layout
@@ -24,10 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body
+        className="min-h-screen flex flex-col antialiased"
+        suppressHydrationWarning
+      >
+        <ConditionalChrome header={<Header />} footer={<Footer />}>
+          {children}
+        </ConditionalChrome>
       </body>
     </html>
   );

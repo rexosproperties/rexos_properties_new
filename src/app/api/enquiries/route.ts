@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { sendAutoResponse } from "@/lib/email";
+import { sendAutoResponse, sendAdminNotification } from "@/lib/email";
 import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Send auto-response email
+    // Send auto-response email to the submitter
     try {
       await sendAutoResponse({
         recipientEmail: email,
@@ -38,6 +38,19 @@ export async function POST(request: NextRequest) {
     } catch (emailError) {
       console.error("Failed to send auto-response email:", emailError);
       // Don't fail the request if email fails - the enquiry was still saved
+    }
+
+    // Notify admin of the new enquiry
+    try {
+      await sendAdminNotification({
+        enquiryType: enquiryType || "General Enquiry",
+        fullName,
+        email,
+        phone,
+        message,
+      });
+    } catch (notifyError) {
+      console.error("Failed to send admin notification:", notifyError);
     }
 
     return NextResponse.json(

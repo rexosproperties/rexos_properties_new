@@ -135,7 +135,7 @@ export default function ContactPage() {
                   <p className="text-xs text-gray-dark mb-1">Email</p>
                   <a
                     href="mailto:info@rexosproperties.com"
-                    className="text-sm font-semibold text-navy hover:text-navy-dark transition-colors break-all"
+                    className="text-sm font-semibold text-navy hover:text-navy-dark transition-colors whitespace-nowrap"
                   >
                     info@rexosproperties.com
                   </a>

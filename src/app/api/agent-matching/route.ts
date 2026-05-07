@@ -119,6 +119,42 @@ export async function POST(request: NextRequest) {
       html: emailHtml,
     });
 
+    // Notify admin of the new agent-matching request
+    try {
+      const adminEmail =
+        process.env.ADMIN_NOTIFY_EMAIL || process.env.EMAIL_USER;
+      if (adminEmail) {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: adminEmail,
+          replyTo: email,
+          subject: `New Agent Match Request — ${firstName} ${lastName}`,
+          html: `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width:600px; margin:0 auto; padding:20px;">
+              <div style="background:#001a4d; color:#fff; padding:20px; border-radius:8px 8px 0 0;">
+                <h2 style="margin:0;">New Agent Match Request</h2>
+              </div>
+              <div style="background:#fff; border:1px solid #eee; border-top:0; padding:20px; border-radius:0 0 8px 8px;">
+                <table style="width:100%; border-collapse:collapse;">
+                  <tr><td style="padding:8px 0; color:#666; width:120px;">Name</td><td style="padding:8px 0; font-weight:600; color:#001a4d;">${firstName} ${lastName}</td></tr>
+                  <tr><td style="padding:8px 0; color:#666;">Email</td><td style="padding:8px 0;"><a href="mailto:${email}" style="color:#001a4d;">${email}</a></td></tr>
+                  <tr><td style="padding:8px 0; color:#666;">Phone</td><td style="padding:8px 0;"><a href="tel:${phone}" style="color:#001a4d;">${phone}</a></td></tr>
+                  <tr><td style="padding:8px 0; color:#666;">Timeline</td><td style="padding:8px 0; font-weight:600; color:#001a4d;">${timeline}</td></tr>
+                </table>
+                <div style="margin-top:16px; padding:16px; background:#f7f8fb; border-left:4px solid #001a4d; border-radius:4px;">
+                  <p style="margin:0 0 6px; color:#666; font-size:12px; text-transform:uppercase; letter-spacing:0.5px;">Search Criteria</p>
+                  <p style="margin:0; white-space:pre-wrap;">${searchSummary || "—"}</p>
+                </div>
+                <p style="margin-top:20px; font-size:12px; color:#999;">Submitted ${new Date().toLocaleString("en-NG", { timeZone: "Africa/Lagos" })} (WAT)</p>
+              </div>
+            </div>
+          `,
+        });
+      }
+    } catch (notifyError) {
+      console.error("Failed to send admin notification:", notifyError);
+    }
+
     return NextResponse.json(
       {
         success: true,

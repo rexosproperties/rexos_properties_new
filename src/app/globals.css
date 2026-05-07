@@ -36,16 +36,16 @@
 
 @theme inline {
   /* ── Brand Colors ── */
-  --color-navy: #1B2A4A;
-  --color-navy-light: #536494;
-  --color-navy-dark: #111D35;
-  --color-blue-steel: #4A5A8A;
+  --color-navy: #1A3763;
+  --color-navy-light: #1A3763;
+  --color-navy-dark: #1A3763;
+  --color-blue-steel: #1A3763;
   --color-white: #ffffff;
   --color-gray-light: #F5F5F5;
   --color-gray: #9CA3AF;
   --color-gray-dark: #6B7280;
   --color-background: #ffffff;
-  --color-foreground: #1B2A4A;
+  --color-foreground: #1A3763;
 
   /* ── Font Families ── */
   --font-heading: "Oswald", sans-serif;
