@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function TestimonialsAdminPage() {
   const items = await prisma.testimonial.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "desc" } as never],
+    orderBy: { order: "asc" },
   });
 
   return (

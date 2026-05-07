@@ -3,7 +3,7 @@ import TestimonialsClient from "./TestimonialsClient";
 
 export default async function Testimonials() {
   const items = await prisma.testimonial.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+    orderBy: { order: "asc" },
   });
 
   return (
