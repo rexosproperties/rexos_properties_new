@@ -20,6 +20,9 @@ export default async function PropertiesPage() {
     status: p.status,
     bedrooms: p.bedrooms,
     bathrooms: p.bathrooms,
+    livingRoom: p.livingRoom,
+    diningArea: p.diningArea,
+    kitchen: p.kitchen,
     coverImage: p.images[0]?.url ?? "/assets/images/estate-1.png",
     createdAt: p.createdAt.toISOString(),
   }));

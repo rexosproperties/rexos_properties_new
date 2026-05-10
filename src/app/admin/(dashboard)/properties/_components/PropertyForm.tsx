@@ -20,6 +20,9 @@ interface ExistingProperty {
   status: string;
   bedrooms: number;
   bathrooms: number;
+  livingRoom: number;
+  diningArea: number;
+  kitchen: number;
   area: number | null;
   brochureUrl: string | null;
   featured: boolean;
@@ -89,6 +92,15 @@ export default function PropertyForm({
   );
   const [bathrooms, setBathrooms] = useState(
     property?.bathrooms?.toString() ?? "0",
+  );
+  const [livingRoom, setLivingRoom] = useState(
+    property?.livingRoom?.toString() ?? "0",
+  );
+  const [diningArea, setDiningArea] = useState(
+    property?.diningArea?.toString() ?? "0",
+  );
+  const [kitchen, setKitchen] = useState(
+    property?.kitchen?.toString() ?? "0",
   );
   const [area, setArea] = useState(property?.area?.toString() ?? "");
   const [brochureUrl, setBrochureUrl] = useState(property?.brochureUrl ?? "");
@@ -179,6 +191,9 @@ export default function PropertyForm({
       status,
       bedrooms: Number(bedrooms) || 0,
       bathrooms: Number(bathrooms) || 0,
+      livingRoom: Number(livingRoom) || 0,
+      diningArea: Number(diningArea) || 0,
+      kitchen: Number(kitchen) || 0,
       area: area ? Number(area) : null,
       brochureUrl: brochureUrl.trim() || null,
       featured,
@@ -346,7 +361,7 @@ export default function PropertyForm({
         <h2 className="text-sm font-semibold text-navy uppercase tracking-wider">
           Specs
         </h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-xs font-semibold text-navy mb-1">
               Bedrooms
@@ -367,6 +382,42 @@ export default function PropertyForm({
               type="number"
               value={bathrooms}
               onChange={(e) => setBathrooms(e.target.value)}
+              min="0"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-navy mb-1">
+              Living Room
+            </label>
+            <input
+              type="number"
+              value={livingRoom}
+              onChange={(e) => setLivingRoom(e.target.value)}
+              min="0"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-navy mb-1">
+              Dining Area
+            </label>
+            <input
+              type="number"
+              value={diningArea}
+              onChange={(e) => setDiningArea(e.target.value)}
+              min="0"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-navy mb-1">
+              Kitchen
+            </label>
+            <input
+              type="number"
+              value={kitchen}
+              onChange={(e) => setKitchen(e.target.value)}
               min="0"
               className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20"
             />

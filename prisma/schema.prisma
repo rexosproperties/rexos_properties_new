@@ -34,6 +34,9 @@ model Property {
   status      String          @default("available")
   bedrooms    Int             @default(0)
   bathrooms   Int             @default(0)
+  livingRoom  Int             @default(0)
+  diningArea  Int             @default(0)
+  kitchen     Int             @default(0)
   area        Float?
   brochureUrl String?
   featured    Boolean         @default(false)

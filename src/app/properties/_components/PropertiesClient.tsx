@@ -18,6 +18,9 @@ export interface PublicProperty {
   status: string;
   bedrooms: number;
   bathrooms: number;
+  livingRoom: number;
+  diningArea: number;
+  kitchen: number;
   coverImage: string;
   createdAt: string;
 }
@@ -231,7 +234,7 @@ export default function PropertiesClient({
                     {property.location}
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs text-gray-dark mb-4">
+                  <div className="flex items-center gap-3 text-xs text-gray-dark mb-4 flex-wrap">
                     <span className="flex items-center gap-1">
                       <Image src="/assets/images/Icon/Bedrooms.svg" alt="Bedrooms" width={16} height={16} />
                       {property.bedrooms}
@@ -240,6 +243,24 @@ export default function PropertiesClient({
                       <Image src="/assets/images/Icon/bathroom.svg" alt="Bathrooms" width={16} height={16} />
                       {property.bathrooms}
                     </span>
+                    {property.livingRoom > 0 && (
+                      <span className="flex items-center gap-1">
+                        <Image src="/assets/images/Icon/living room.svg" alt="Living Room" width={16} height={16} />
+                        {property.livingRoom}
+                      </span>
+                    )}
+                    {property.diningArea > 0 && (
+                      <span className="flex items-center gap-1">
+                        <Image src="/assets/images/Icon/Dining area.svg" alt="Dining Area" width={16} height={16} />
+                        {property.diningArea}
+                      </span>
+                    )}
+                    {property.kitchen > 0 && (
+                      <span className="flex items-center gap-1">
+                        <Image src="/assets/images/Icon/kitchen.svg" alt="Kitchen" width={16} height={16} />
+                        {property.kitchen}
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-between">

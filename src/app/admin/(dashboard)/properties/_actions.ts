@@ -27,6 +27,9 @@ export interface PropertyInput {
   status: string;
   bedrooms: number;
   bathrooms: number;
+  livingRoom: number;
+  diningArea: number;
+  kitchen: number;
   area?: number | null;
   brochureUrl?: string | null;
   featured: boolean;
@@ -63,6 +66,9 @@ export async function createProperty(input: PropertyInput) {
       status: input.status,
       bedrooms: input.bedrooms,
       bathrooms: input.bathrooms,
+      livingRoom: input.livingRoom,
+      diningArea: input.diningArea,
+      kitchen: input.kitchen,
       area: input.area ?? null,
       brochureUrl: input.brochureUrl ?? null,
       featured: input.featured,
@@ -103,9 +109,13 @@ export async function updateProperty(id: string, input: PropertyInput) {
         status: input.status,
         bedrooms: input.bedrooms,
         bathrooms: input.bathrooms,
+        livingRoom: input.livingRoom,
+        diningArea: input.diningArea,
+        kitchen: input.kitchen,
         area: input.area ?? null,
         brochureUrl: input.brochureUrl ?? null,
         featured: input.featured,
+        features: input.features,
         images: {
           create: input.images.map((img, index) => ({
             url: img.url,

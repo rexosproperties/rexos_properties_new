@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import PropertyGallery from "../_components/PropertyGallery";
+import { iconForFeature } from "@/lib/feature-icons";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +88,39 @@ export default async function PropertyDetailPage({
                 />
                 {property.bathrooms}
               </span>
+              {property.livingRoom > 0 && (
+                <span className="flex items-center gap-1.5">
+                  <Image
+                    src="/assets/images/Icon/living room.svg"
+                    alt="Living Room"
+                    width={18}
+                    height={18}
+                  />
+                  {property.livingRoom}
+                </span>
+              )}
+              {property.diningArea > 0 && (
+                <span className="flex items-center gap-1.5">
+                  <Image
+                    src="/assets/images/Icon/Dining area.svg"
+                    alt="Dining Area"
+                    width={18}
+                    height={18}
+                  />
+                  {property.diningArea}
+                </span>
+              )}
+              {property.kitchen > 0 && (
+                <span className="flex items-center gap-1.5">
+                  <Image
+                    src="/assets/images/Icon/kitchen.svg"
+                    alt="Kitchen"
+                    width={18}
+                    height={18}
+                  />
+                  {property.kitchen}
+                </span>
+              )}
               {property.area && (
                 <span className="text-xs text-gray-dark">
                   {property.area.toLocaleString()} sqm
@@ -102,6 +136,31 @@ export default async function PropertyDetailPage({
                 {property.description}
               </p>
             </div>
+
+            {property.features.length > 0 && (
+              <div className="mb-10">
+                <h2 className="text-xl font-bold text-navy mb-4">
+                  Key Features and Amenities
+                </h2>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8">
+                  {property.features.map((feature, idx) => (
+                    <li
+                      key={`${feature}-${idx}`}
+                      className="flex items-start gap-3 text-sm text-gray-dark"
+                    >
+                      <Image
+                        src={iconForFeature(feature)}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className="mt-0.5 shrink-0"
+                      />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div>
               <h2 className="text-xl font-bold text-navy mb-4">Location map</h2>

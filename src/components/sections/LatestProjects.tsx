@@ -53,7 +53,7 @@ export default async function LatestProjects() {
                 {project.location}
               </div>
 
-              <div className="flex items-center gap-3 text-xs text-gray-dark mb-4 font-sans">
+              <div className="flex items-center gap-3 text-xs text-gray-dark mb-4 font-sans flex-wrap">
                 <span className="flex items-center gap-1">
                   <Image
                     src="/assets/images/Icon/bedroom.svg"
@@ -72,6 +72,39 @@ export default async function LatestProjects() {
                   />
                   {project.bathrooms}
                 </span>
+                {project.livingRoom > 0 && (
+                  <span className="flex items-center gap-1">
+                    <Image
+                      src="/assets/images/Icon/living room.svg"
+                      alt="Living Room"
+                      width={20}
+                      height={20}
+                    />
+                    {project.livingRoom}
+                  </span>
+                )}
+                {project.diningArea > 0 && (
+                  <span className="flex items-center gap-1">
+                    <Image
+                      src="/assets/images/Icon/Dining area.svg"
+                      alt="Dining Area"
+                      width={20}
+                      height={20}
+                    />
+                    {project.diningArea}
+                  </span>
+                )}
+                {project.kitchen > 0 && (
+                  <span className="flex items-center gap-1">
+                    <Image
+                      src="/assets/images/Icon/kitchen.svg"
+                      alt="Kitchen"
+                      width={20}
+                      height={20}
+                    />
+                    {project.kitchen}
+                  </span>
+                )}
               </div>
 
               <div className="flex items-center justify-between">
