@@ -12,7 +12,7 @@ export default function ConditionalChrome({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith("/admin");
+  const isAdmin = pathname?.startsWith("/rexos-staff");
 
   if (isAdmin) return <>{children}</>;
 

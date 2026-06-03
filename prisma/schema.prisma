@@ -14,12 +14,14 @@ datasource db {
 
 // ─── AUTH ────────────────────────────────────────────
 model Admin {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  email       String   @unique
+  password    String
+  name        String
+  role        String   @default("staff") // "owner" | "staff"
+  permissions String[] @default([]) // section keys a staff user can access
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // ─── PROPERTIES ──────────────────────────────────────
@@ -120,4 +122,11 @@ model Testimonial {
   imageUrl String?
   rating   Int     @default(5)
   order    Int     @default(0)
+}
+
+// ─── ANALYTICS ───────────────────────────────────────
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  createdAt DateTime @default(now())
 }

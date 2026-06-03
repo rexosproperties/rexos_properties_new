@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(npx prisma generate 2>&1)"
+      "PowerShell(npx prisma generate 2>&1)",
+      "PowerShell(npm run seed:admin 2>&1)"
     ]
   }
 }

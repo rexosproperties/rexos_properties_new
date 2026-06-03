@@ -3,7 +3,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export default async function LatestProjects() {
-  const projects = await prisma.property.findMany({
+  let projects = await prisma.property.findMany({
     where: {
       featured: true,
       status: { not: "off-market" },
@@ -12,6 +12,16 @@ export default async function LatestProjects() {
     take: 3,
     include: { images: { orderBy: { order: "asc" }, take: 1 } },
   });
+
+  // Fallback: if no featured properties, show the 3 most recent non-off-market
+  if (projects.length === 0) {
+    projects = await prisma.property.findMany({
+      where: { status: { not: "off-market" } },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+      include: { images: { orderBy: { order: "asc" }, take: 1 } },
+    });
+  }
 
   if (projects.length === 0) return null;
 
