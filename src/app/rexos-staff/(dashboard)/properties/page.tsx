@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { deleteProperty } from "./_actions";
+import StatusToggle from "./_components/StatusToggle";
 
 export const dynamic = "force-dynamic";
 
@@ -89,8 +90,8 @@ export default async function PropertiesAdminPage() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-dark capitalize">
-                    {p.status}
+                  <td className="px-6 py-4 text-sm">
+                    <StatusToggle id={p.id} status={p.status} />
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-dark whitespace-nowrap">
                     ₦{p.price.toLocaleString()}

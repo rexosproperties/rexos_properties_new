@@ -44,8 +44,18 @@ export default async function LatestProjects() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm text-navy text-xs font-semibold px-4 py-1.5 rounded-full font-sans">
-                  {project.type === "rent" ? "For Rent" : "For Sale"}
+                <span
+                  className={`absolute top-4 right-4 backdrop-blur-sm text-xs font-semibold px-4 py-1.5 rounded-full font-sans ${
+                    project.status === "sold"
+                      ? "bg-red-600/90 text-white"
+                      : "bg-white/80 text-navy"
+                  }`}
+                >
+                  {project.status === "sold"
+                    ? "Sold"
+                    : project.type === "rent"
+                      ? "For Rent"
+                      : "For Sale"}
                 </span>
               </div>
 

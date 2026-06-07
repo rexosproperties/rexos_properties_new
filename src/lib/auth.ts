@@ -7,6 +7,37 @@ import { authConfig } from "./auth.config";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   session: { strategy: "jwt" },
+  callbacks: {
+    ...authConfig.callbacks,
+    async jwt({ token, user }) {
+      // Sign-in: stamp the token from the authorize() result.
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.permissions = user.permissions;
+        token.refreshedAt = Date.now();
+        return token;
+      }
+
+      // Later requests: re-sync role/permissions from the DB at most
+      // every 5 minutes so changes apply without forcing a re-login.
+      const FIVE_MIN = 5 * 60 * 1000;
+      const stale =
+        !token.refreshedAt ||
+        Date.now() - (token.refreshedAt as number) > FIVE_MIN;
+      if (token.id && stale) {
+        const admin = await prisma.admin.findUnique({
+          where: { id: token.id as string },
+          select: { role: true, permissions: true },
+        });
+        if (!admin) return null; // account deleted → invalidate session
+        token.role = admin.role;
+        token.permissions = admin.permissions;
+        token.refreshedAt = Date.now();
+      }
+      return token;
+    },
+  },
   providers: [
     Credentials({
       credentials: {

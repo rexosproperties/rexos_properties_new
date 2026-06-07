@@ -134,6 +134,26 @@ export async function updateProperty(id: string, input: PropertyInput) {
   revalidatePath("/");
 }
 
+export async function togglePropertyStatus(id: string) {
+  await requireAdmin();
+  const property = await prisma.property.findUnique({
+    where: { id },
+    select: { status: true, slug: true },
+  });
+  if (!property) return;
+
+  const newStatus = property.status === "sold" ? "available" : "sold";
+  await prisma.property.update({
+    where: { id },
+    data: { status: newStatus },
+  });
+
+  revalidatePath("/rexos-staff/properties");
+  revalidatePath("/properties");
+  revalidatePath(`/properties/${property.slug}`);
+  revalidatePath("/");
+}
+
 export async function deleteProperty(id: string) {
   await requireAdmin();
   await prisma.property.delete({ where: { id } });

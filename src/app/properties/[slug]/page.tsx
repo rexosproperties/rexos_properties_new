@@ -126,9 +126,15 @@ export default async function PropertyDetailPage({
                   {property.area.toLocaleString()} sqm
                 </span>
               )}
-              <span className="ml-auto inline-block bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full capitalize">
-                {property.type === "rent" ? "For Rent" : "For Sale"}
-              </span>
+              {property.status === "sold" ? (
+                <span className="ml-auto inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">
+                  Sold
+                </span>
+              ) : (
+                <span className="ml-auto inline-block bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full capitalize">
+                  {property.type === "rent" ? "For Rent" : "For Sale"}
+                </span>
+              )}
             </div>
 
             <div className="mb-8">
