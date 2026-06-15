@@ -17,16 +17,21 @@ import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import Newsletter from "@/components/sections/Newsletter";
 import BlogPreview from "@/components/sections/BlogPreview";
+import { getHomeContent } from "@/lib/page-content";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const content = await getHomeContent();
+
   return (
     <>
-      <Hero />
-      <Services />
+      <Hero content={content.hero} />
+      <Services services={content.services} />
       <LatestProjects />
-      <Milestones />
+      <Milestones content={content.milestones} />
       <Testimonials />
-      <FAQ />
+      <FAQ content={content.faq} />
       <Newsletter />
       <BlogPreview />
     </>

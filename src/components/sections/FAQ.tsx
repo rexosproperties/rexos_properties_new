@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { HomeContent } from "@/lib/page-content";
 
 /**
  * FAQ Section
@@ -8,33 +9,11 @@ import { useState } from "react";
  * Uses an accordion pattern: clicking a question expands/collapses its answer.
  * "use client" needed for the toggle state.
  *
- * The FAQ items will be editable from admin via the PageContent model.
+ * Heading, description and items are editable from admin (Page Content → Home).
  */
 
-const faqs = [
-  {
-    question: "What's the buying process?",
-    answer:
-      "Our buying process is straightforward. Start by browsing our properties, schedule a tour, and our team will guide you through documentation, payment plans, and handover.",
-  },
-  {
-    question: "How much deposit do I need?",
-    answer:
-      "Deposit requirements vary by property. Typically, we require an initial deposit of 30-50% with flexible payment plans available for the balance.",
-  },
-  {
-    question: "Do you offer payment plans?",
-    answer:
-      "Yes, we offer flexible payment plans tailored to your financial situation. Plans range from 6 to 24 months depending on the property.",
-  },
-  {
-    question: "Can I customize my property?",
-    answer:
-      "Absolutely! We offer customization options during the construction phase. Our interior design team will work with you to create your dream home.",
-  },
-];
-
-export default function FAQ() {
+export default function FAQ({ content }: { content: HomeContent["faq"] }) {
+  const faqs = content.items;
   // Track which FAQ item is currently open. null means all are closed.
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -50,11 +29,10 @@ export default function FAQ() {
           {/* Left: Title & Description */}
           <div>
             <h2 className="text-4xl lg:text-5xl font-bold text-navy mb-4 font-sans">
-              FAQ
+              {content.heading}
             </h2>
             <p className="text-gray-dark leading-relaxed">
-              Find quick answers to common questions about buying, selling, and
-              investing in property with Rex&apos;o&apos;s.
+              {content.description}
             </p>
           </div>
 

@@ -1,24 +1,18 @@
 import Image from "next/image";
+import type { HomeContent } from "@/lib/page-content";
 
-const services = [
-  {
-    title: "Property Investment",
-    description: "Master-planned property development with modern amenities.",
-    icon: "/assets/images/Icon/ser-1.svg",
-  },
-  {
-    title: "Property Sale",
-    description: "Discover luxury homes for sale in Lekki and prime investment opportunities.",
-    icon: "/assets/images/Icon/ser-2.svg",
-  },
-  {
-    title: "Property Development",
-    description: "End-to-end property development in Nigeria, from concept to handover.",
-    icon: "/assets/images/Icon/ser-3.svg",
-  },
+// Icons stay paired to each card slot by position.
+const serviceIcons = [
+  "/assets/images/Icon/ser-1.svg",
+  "/assets/images/Icon/ser-2.svg",
+  "/assets/images/Icon/ser-3.svg",
 ];
 
-export default function Services() {
+export default function Services({
+  services,
+}: {
+  services: HomeContent["services"];
+}) {
   return (
     <section className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -27,12 +21,12 @@ export default function Services() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div key={service.title} className="flex flex-col items-center text-center">
+          {services.map((service, i) => (
+            <div key={i} className="flex flex-col items-center text-center">
               {/* Icon */}
               <div className="w-40 h-40 mb-6">
                 <Image
-                  src={service.icon}
+                  src={serviceIcons[i % serviceIcons.length]}
                   alt={service.title}
                   width={192}
                   height={192}

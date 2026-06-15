@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const stats = [
-  { target: 33, suffix: "+", label: "Successful Project Done" },
-  { target: 7, suffix: "+", label: "Projects" },
-  { target: 700, suffix: "+", label: "Delightful Clients" },
-  { target: 8, suffix: "+", label: "Locations" },
-];
+import type { HomeContent } from "@/lib/page-content";
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -52,26 +46,25 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   );
 }
 
-export default function Milestones() {
+export default function Milestones({
+  content,
+}: {
+  content: HomeContent["milestones"];
+}) {
   return (
     <section className="bg-blue-steel py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Top Row: Title + Description */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
-            Milestones we&apos;re honored to have achieved
+            {content.heading}
           </h2>
-          <p className="text-white/80 leading-relaxed">
-            These aren&apos;t just our milestones, they&apos;re yours too. Every
-            home delivered, every client served, and every community created
-            reflects our shared commitment to quality real estate. Together,
-            we&apos;ve built something extraordinary.
-          </p>
+          <p className="text-white/80 leading-relaxed">{content.description}</p>
         </div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {stats.map((stat) => (
+          {content.stats.map((stat) => (
             <div key={stat.label}>
               <div className="text-5xl lg:text-6xl font-bold text-white mb-2">
                 <CountUp target={stat.target} suffix={stat.suffix} />

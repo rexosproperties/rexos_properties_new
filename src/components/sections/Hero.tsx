@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AgentMatchingModal from "@/components/ui/AgentMatchingModal";
+import type { HomeContent } from "@/lib/page-content";
 
 const heroImages = [
   "/assets/images/slider-1.png",
@@ -18,7 +19,7 @@ const propertyTabs = ["For Sale", "For Rent"];
 
 const sortOptions = ["Newest", "Popular", "Recommendation"];
 
-export default function Hero() {
+export default function Hero({ content }: { content: HomeContent["hero"] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeTab, setActiveTab] = useState("For Sale");
   const [activeSort, setActiveSort] = useState("Newest");
@@ -93,44 +94,36 @@ export default function Hero() {
           {/* Hero Content */}
           <div className="absolute inset-0 z-20 flex flex-col justify-center lg:justify-end items-center lg:items-start px-4 sm:px-6 lg:px-8 lg:pb-24 max-w-7xl mx-auto w-full">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white max-w-xl leading-[1.1] text-center lg:text-left">
-              Building Premium Luxury Homes In Lagos
+              {content.headline}
             </h1>
           </div>
 
           {/* Info Card — desktop overlay (top right) */}
           <div className="absolute top-6 right-4 lg:right-12 z-20 bg-navy/90 backdrop-blur-sm text-white p-6 rounded-2xl max-w-sm hidden md:block">
-            <h2 className="text-lg font-bold mb-3">
-              Luxury Homes & Real Estate Development in Lagos
-            </h2>
+            <h2 className="text-lg font-bold mb-3">{content.cardTitle}</h2>
             <p className="text-sm text-white/80 leading-relaxed mb-4">
-              Experience unparalleled luxury living in Lagos. Our team of
-              skilled architects, builders, realtors, and interior designers has
-              created something extraordinary just for you.
+              {content.cardText}
             </p>
             <Link
               href="/properties"
               className="text-xs font-semibold uppercase tracking-wider border-b-2 border-white pb-1 hover:text-white/80 transition-colors"
             >
-              Explore Our Portfolio
+              {content.cardCta}
             </Link>
           </div>
         </div>
 
         {/* Info Card — mobile full-width block (below carousel) */}
         <div className="md:hidden bg-blue-steel text-white px-6 py-8">
-          <h2 className="text-lg font-bold mb-3">
-            Luxury Homes & Real Estate Development in Lagos
-          </h2>
+          <h2 className="text-lg font-bold mb-3">{content.cardTitle}</h2>
           <p className="text-sm text-white/80 leading-relaxed mb-4">
-            Experience unparalleled luxury living in Lagos. Our team of skilled
-            architects, builders, realtors, and interior designers has created
-            something extraordinary just for you.
+            {content.cardText}
           </p>
           <Link
             href="/properties"
             className="text-xs font-semibold uppercase tracking-wider border-b-2 border-white pb-1 hover:text-white/80 transition-colors"
           >
-            Explore Our Portfolio
+            {content.cardCta}
           </Link>
         </div>
 

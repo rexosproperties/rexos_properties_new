@@ -1,20 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getAboutContent } from "@/lib/page-content";
 
 export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
-  const teamMembers = await prisma.teamMember.findMany({
-    orderBy: [{ order: "asc" }, { name: "asc" }],
-  });
+  const [teamMembers, content] = await Promise.all([
+    prisma.teamMember.findMany({
+      orderBy: [{ order: "asc" }, { name: "asc" }],
+    }),
+    getAboutContent(),
+  ]);
   return (
     <>
       {/* Page Banner */}
       <section className="relative h-[420px] overflow-hidden">
         <Image
           src="/assets/images/blog-3.png"
-          alt="Building Distinction Since 2019"
+          alt={content.bannerHeading}
           fill
           className="object-cover"
           priority
@@ -30,7 +34,7 @@ export default async function AboutPage() {
             <span className="text-white">About Us</span>
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold">
-            Building Distinction Since 2019
+            {content.bannerHeading}
           </h1>
         </div>
       </section>
@@ -38,32 +42,9 @@ export default async function AboutPage() {
       {/* About Content */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-6 text-gray-dark leading-relaxed">
-          <p>
-            Established in 2019, Rex&apos;o&apos;s Properties is defined by a
-            commitment to refined living and enduring quality. Since inception,
-            the company has delivered a portfolio of premium residential
-            properties distinguished by thoughtful design and meticulous
-            execution.
-          </p>
-          <p>
-            Our approach is deliberate and disciplined. From site selection to
-            architectural detailing, every element is carefully considered to
-            ensure cohesion, elegance, and functionality. We believe that true
-            quality lies in precision: in balanced proportions, enduring
-            materials, and spaces designed for contemporary living.
-          </p>
-          <p>
-            At Rex&apos;o&apos;s Properties, excellence is not overstated, it is
-            embedded. Each development reflects our dedication to creating
-            residences of integrity, comfort, and quiet distinction.
-          </p>
-          <p>
-            At Rex&apos;o&apos;s Properties, our greatest achievement is the
-            satisfaction of every client we serve. From first-time homebuyers
-            taking their most important financial step, to seasoned investors
-            expanding their portfolio — we are committed to delivering
-            excellence at every stage of the journey.
-          </p>
+          {content.intro.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
         </div>
       </section>
 
@@ -74,19 +55,13 @@ export default async function AboutPage() {
             <h2 className="text-2xl lg:text-3xl font-bold text-navy mb-4">
               Our Vision
             </h2>
-            <p className="text-gray-dark leading-relaxed">
-              To become Nigeria&apos;s most trusted real estate partner,
-              transforming the property landscape and home at a time.
-            </p>
+            <p className="text-gray-dark leading-relaxed">{content.vision}</p>
           </div>
           <div>
             <h2 className="text-2xl lg:text-3xl font-bold text-navy mb-4">
               Our Mission
             </h2>
-            <p className="text-gray-dark leading-relaxed">
-              To provide accessible, quality real estate solutions while
-              maintaining the highest standards of trust and professionalism.
-            </p>
+            <p className="text-gray-dark leading-relaxed">{content.mission}</p>
           </div>
         </div>
       </section>
@@ -96,12 +71,9 @@ export default async function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-navy mb-3">
-              Meet Our Team
+              {content.teamHeading}
             </h2>
-            <p className="text-gray-dark">
-              Real people. Real expertise. Real results—and a commitment to your
-              success.
-            </p>
+            <p className="text-gray-dark">{content.teamSubtext}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

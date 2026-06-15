@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export default async function PropertiesPage() {
   const properties = await prisma.property.findMany({
     where: { status: { not: "off-market" } },
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
     include: { images: { orderBy: { order: "asc" }, take: 1 } },
   });
 
