@@ -25,6 +25,7 @@ export default async function PropertiesPage() {
     kitchen: p.kitchen,
     coverImage: p.images[0]?.url ?? "/assets/images/estate-1.png",
     createdAt: p.createdAt.toISOString(),
+    featured: p.featured,
   }));
 
   return <PropertiesClient properties={items} />;

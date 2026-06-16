@@ -23,6 +23,7 @@ export interface PublicProperty {
   kitchen: number;
   coverImage: string;
   createdAt: string;
+  featured: boolean;
 }
 
 export default function PropertiesClient({
@@ -62,10 +63,12 @@ export default function PropertiesClient({
     }
 
     if (activeSort === "Newest") {
-      result = [...result].sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      );
+      result = [...result].sort((a, b) => {
+        if (a.featured !== b.featured) return a.featured ? -1 : 1;
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
     }
     return result;
   }, [properties, activeTab, activeSort, formData]);
