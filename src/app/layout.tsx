@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -57,6 +58,14 @@ export default async function RootLayout({
         <Suspense fallback={null}>
           <PageViewTracker />
         </Suspense>
+        {/* Newsletter popup: MailerLite universal script, powers the Subscribe popup in Newsletter.tsx */}
+        <Script id="mailerlite-universal" strategy="afterInteractive">
+          {`(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+.push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2692836');`}
+        </Script>
       </body>
     </html>
   );
