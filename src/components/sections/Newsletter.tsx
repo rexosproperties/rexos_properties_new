@@ -39,13 +39,13 @@ export default function Newsletter() {
       </div>
 
       <div
-        className={`fixed inset-0 z-50 items-center justify-center bg-black/60 px-4 ${
+        className={`fixed inset-0 z-50 items-center justify-center bg-black/60 p-4 ${
           isOpen ? "flex" : "hidden"
         }`}
         onClick={() => setIsOpen(false)}
       >
         <div
-          className="relative bg-white rounded-2xl p-6 max-w-lg w-full"
+          className="relative bg-white rounded-2xl p-4 sm:p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
