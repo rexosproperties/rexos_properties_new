@@ -39,24 +39,26 @@ export default function Newsletter() {
       </div>
 
       <div
-        className={`fixed inset-0 z-50 items-center justify-center bg-black/60 p-4 ${
+        className={`fixed inset-0 z-50 items-start sm:items-center justify-center overflow-y-auto bg-black/60 p-4 ${
           isOpen ? "flex" : "hidden"
         }`}
         onClick={() => setIsOpen(false)}
       >
         <div
-          className="relative bg-white rounded-2xl p-4 sm:p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto"
+          className="relative bg-white rounded-2xl w-full max-w-lg max-h-[calc(100dvh-2rem)] flex flex-col overflow-hidden mt-4 sm:mt-0"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             type="button"
             onClick={() => setIsOpen(false)}
             aria-label="Close"
-            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl leading-none"
+            className="absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-gray-500 shadow hover:text-gray-700 hover:bg-gray-100 text-2xl leading-none"
           >
             &times;
           </button>
-          <div className="ml-embedded" data-form="K9bemY" />
+          <div className="overflow-y-auto p-4 sm:p-6">
+            <div className="ml-embedded" data-form="K9bemY" />
+          </div>
         </div>
       </div>
     </section>
